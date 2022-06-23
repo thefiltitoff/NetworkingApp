@@ -1,24 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BJx-Ge-iKw">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <scene sceneID="psi-Lx-wjj">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <viewController id="BJx-Ge-iKw" customClass="ViewController" customModule="Networking" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zEG-Ee-yy8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PCD-XB-0x7">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to Download an Image" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="THw-ST-WgH">
+                                <rect key="frame" x="16" y="0.0" width="288" height="548"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="45"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.22352941179999999" green="0.28235294119999998" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ec-Fb-h3J">
+                                <rect key="frame" x="16" y="0.0" width="288" height="548"/>
+                                <connections>
+                                    <action selector="getImagePressed:" destination="BJx-Ge-iKw" eventType="touchUpInside" id="igl-Dd-YC2"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="JAe-K1-7oB"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="THw-ST-WgH" firstAttribute="leading" secondItem="JAe-K1-7oB" secondAttribute="leading" constant="16" id="8Ob-ml-RUX"/>
+                            <constraint firstItem="JAe-K1-7oB" firstAttribute="trailing" secondItem="THw-ST-WgH" secondAttribute="trailing" constant="16" id="CK8-MO-BLL"/>
+                            <constraint firstItem="8ec-Fb-h3J" firstAttribute="top" secondItem="JAe-K1-7oB" secondAttribute="top" id="F09-c7-Pk3"/>
+                            <constraint firstItem="PCD-XB-0x7" firstAttribute="bottom" secondItem="JAe-K1-7oB" secondAttribute="bottom" id="Jty-KJ-eIY"/>
+                            <constraint firstItem="JAe-K1-7oB" firstAttribute="bottom" secondItem="THw-ST-WgH" secondAttribute="bottom" constant="20" id="LyK-6t-hfV"/>
+                            <constraint firstItem="PCD-XB-0x7" firstAttribute="trailing" secondItem="JAe-K1-7oB" secondAttribute="trailing" id="PBi-9s-DEB"/>
+                            <constraint firstItem="8ec-Fb-h3J" firstAttribute="leading" secondItem="JAe-K1-7oB" secondAttribute="leading" constant="16" id="XhD-14-QHN"/>
+                            <constraint firstItem="PCD-XB-0x7" firstAttribute="leading" secondItem="JAe-K1-7oB" secondAttribute="leading" id="f72-7P-3eB"/>
+                            <constraint firstItem="THw-ST-WgH" firstAttribute="top" secondItem="JAe-K1-7oB" secondAttribute="top" id="fxu-SL-uoN"/>
+                            <constraint firstItem="PCD-XB-0x7" firstAttribute="top" secondItem="zEG-Ee-yy8" secondAttribute="top" id="gei-GS-nNx"/>
+                            <constraint firstItem="JAe-K1-7oB" firstAttribute="trailing" secondItem="8ec-Fb-h3J" secondAttribute="trailing" constant="16" id="nOJ-Wr-Thb"/>
+                            <constraint firstItem="JAe-K1-7oB" firstAttribute="bottom" secondItem="8ec-Fb-h3J" secondAttribute="bottom" constant="20" id="pN6-Nl-eq1"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="getImageButton" destination="8ec-Fb-h3J" id="qFU-2K-s8U"/>
+                        <outlet property="imageView" destination="PCD-XB-0x7" id="KWz-Om-61X"/>
+                        <outlet property="label" destination="THw-ST-WgH" id="nsj-tK-ZNI"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pgL-4k-Vcz" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="132.68365817091455"/>
         </scene>
     </scenes>
 </document>

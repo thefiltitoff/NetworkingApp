@@ -11,11 +11,13 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var getImageButton: UIButton!
+
+    @IBAction func getImagePressed(_ sender: Any) {
     }
-
-
+    
 }
+
 
