@@ -18,6 +18,7 @@
 		2BA63DCB286AF79A00542800 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA63DCA286AF79A00542800 /* WebViewController.swift */; };
 		2BA63DD1286AF95500542800 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA63DD0286AF95500542800 /* Course.swift */; };
 		2BA63DD4286AFE0100542800 /* WebsiteDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA63DD3286AFE0100542800 /* WebsiteDescription.swift */; };
+		2BA63DD6286B04FA00542800 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA63DD5286B04FA00542800 /* TableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		2BA63DCA286AF79A00542800 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		2BA63DD0286AF95500542800 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		2BA63DD3286AFE0100542800 /* WebsiteDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteDescription.swift; sourceTree = "<group>"; };
+		2BA63DD5286B04FA00542800 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 				2BA63DCD286AF91800542800 /* Storyboards */,
 				2BA63DD2286AF95B00542800 /* Models */,
 				2BA63DCF286AF93F00542800 /* Resources */,
+				2BA63DD7286B050000542800 /* View */,
 			);
 			path = NetworkingApp;
 			sourceTree = "<group>";
@@ -120,6 +123,14 @@
 				2BA63DD3286AFE0100542800 /* WebsiteDescription.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		2BA63DD7286B050000542800 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2BA63DD5286B04FA00542800 /* TableViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,6 +207,7 @@
 				2B546E082864F45E0020B53F /* ViewController.swift in Sources */,
 				2BA63DD1286AF95500542800 /* Course.swift in Sources */,
 				2BA63DD4286AFE0100542800 /* WebsiteDescription.swift in Sources */,
+				2BA63DD6286B04FA00542800 /* TableViewCell.swift in Sources */,
 				2BA63DCB286AF79A00542800 /* WebViewController.swift in Sources */,
 				2BA63DC9286AF73A00542800 /* CoursesTableViewController.swift in Sources */,
 				2B546E042864F45E0020B53F /* AppDelegate.swift in Sources */,

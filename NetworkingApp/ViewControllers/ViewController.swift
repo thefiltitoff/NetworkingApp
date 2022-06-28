@@ -17,8 +17,7 @@ class ViewController: UIViewController {
         
         let session = URLSession.shared
         session.dataTask(with: url) { data, response, error in
-            guard let response = response,
-                let data = data else { return }
+            guard let data = data else { return }
             
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: [])

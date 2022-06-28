@@ -31,7 +31,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="tf5-DU-Ob9" kind="show" id="vbv-HG-6Ig"/>
+                                            <segue destination="tf5-DU-Ob9" kind="show" identifier="imageView" id="vbv-HG-6Ig"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mvs-1X-14F">
@@ -61,7 +61,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="TEf-9T-MIs" kind="show" id="oHu-cF-nan"/>
+                                            <segue destination="TEf-9T-MIs" kind="show" identifier="courses" id="oHu-cF-nan"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l3b-Zh-cIQ">
@@ -106,7 +106,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="sYF-ka-ynz">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="sYF-ka-ynz" customClass="TableViewCell" customModule="NetworkingApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44.5" width="320" height="75"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sYF-ka-ynz" id="nOC-gK-txF">
@@ -158,6 +158,12 @@
                                         <constraint firstAttribute="bottom" secondItem="jUt-A5-oDj" secondAttribute="bottom" id="xtC-xI-MgY"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="courseImage" destination="jUt-A5-oDj" id="zwz-Rl-euo"/>
+                                    <outlet property="courseNameLabel" destination="Sfj-KP-o9W" id="obs-gm-wn4"/>
+                                    <outlet property="numberOfLessons" destination="9z2-10-yvK" id="Tnd-pg-IEp"/>
+                                    <outlet property="numberOfTests" destination="SC1-Nv-dXm" id="IOW-go-49o"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -167,7 +173,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Our courses" id="nUc-i4-40C"/>
                     <connections>
-                        <segue destination="xyE-mb-kSs" kind="show" id="4vD-JR-tBa"/>
+                        <segue destination="xyE-mb-kSs" kind="show" identifier="Description" id="4vD-JR-tBa"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WWN-aq-Mq5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -190,7 +196,7 @@
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="WM0-gd-wGB">
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WM0-gd-wGB">
                                 <rect key="frame" x="0.0" y="44" width="320" height="4"/>
                             </progressView>
                         </subviews>
