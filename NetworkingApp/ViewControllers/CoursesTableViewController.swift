@@ -15,11 +15,6 @@ class CoursesTableViewController: UITableViewController {
     private var courseName: String?
     private var courseURL: String?
     private let url = "https://swiftbook.ru//wp-content/uploads/api/api_courses"
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        fetchData()
-    }
     
     func fetchData() {
         NetworkManager.fetchData(url: url) { [unowned self] courses in
@@ -28,6 +23,10 @@ class CoursesTableViewController: UITableViewController {
                 self.tableView.reloadData()
             }
         }
+    }
+    
+    func fetchDataWithAlamofire() {
+        AlamofireNetworkManager.sendRequest(url: url)
     }
     
     private func configureCell(cell: TableViewCell, for indexPath: IndexPath) {
