@@ -89,4 +89,32 @@ class NetworkManager {
             }
         }.resume()
     }
+    
+    static func uploadImage(url: String) {
+        let image = UIImage(named: "Fox")!
+        let httpHeaders = ["Authorization" : "Client-ID 15abe021a630f67"]
+        guard let imageProperties = ImageProperties(withImage: image, forKey: "image") else { return }
+        
+        guard let url = URL(string: url) else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.allHTTPHeaderFields = httpHeaders
+        request.httpBody = imageProperties.data
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let response = response {
+                print(response)
+            }
+            
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    print(json)
+                } catch let error as NSError {
+                    print(error)
+                }
+            }
+        }.resume()
+        
+    }
 }

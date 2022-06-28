@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2B467628286B19F20056CAD7 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B467627286B19F20056CAD7 /* NetworkManager.swift */; };
+		2B46762A286B292E0056CAD7 /* ImageProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B467629286B292E0056CAD7 /* ImageProperties.swift */; };
 		2B473AF3286A3C12008F9277 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B473AF2286A3C12008F9277 /* ImageViewController.swift */; };
 		2B546E042864F45E0020B53F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B546E032864F45E0020B53F /* AppDelegate.swift */; };
 		2B546E062864F45E0020B53F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B546E052864F45E0020B53F /* SceneDelegate.swift */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		2B467627286B19F20056CAD7 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		2B467629286B292E0056CAD7 /* ImageProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProperties.swift; sourceTree = "<group>"; };
 		2B473AF2286A3C12008F9277 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		2B546E002864F45E0020B53F /* NetworkingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetworkingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B546E032864F45E0020B53F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 			children = (
 				2BA63DD0286AF95500542800 /* Course.swift */,
 				2BA63DD3286AFE0100542800 /* WebsiteDescription.swift */,
+				2B467629286B292E0056CAD7 /* ImageProperties.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 				2BA63DCB286AF79A00542800 /* WebViewController.swift in Sources */,
 				2BA63DC9286AF73A00542800 /* CoursesTableViewController.swift in Sources */,
 				2B546E042864F45E0020B53F /* AppDelegate.swift in Sources */,
+				2B46762A286B292E0056CAD7 /* ImageProperties.swift in Sources */,
 				2B473AF3286A3C12008F9277 /* ImageViewController.swift in Sources */,
 				2B546E062864F45E0020B53F /* SceneDelegate.swift in Sources */,
 				2BA63DDB286B171700542800 /* CollectionViewCell.swift in Sources */,
