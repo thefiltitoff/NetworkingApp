@@ -8,13 +8,15 @@
 
 
 import UIKit
+import UserNotifications
 
 enum Actions: String, CaseIterable {
-    case downloadImage
-    case get
-    case post
-    case ourCourses
-    case uploadImage
+    case downloadImage = "Download Image"
+    case get = "GET"
+    case post = "POST"
+    case ourCourses = "Our Courses"
+    case uploadImage = "Upload Image"
+    case downloadFile = "Download File"
 }
 
 private let reuseIdentifier = "Cell"
@@ -25,7 +27,21 @@ class MainCollectionViewController: UICollectionViewController {
 
    // let actions = ["Download Image", "GET", "POST", "Our Courses", "Upload Image"]
     let actions = Actions.allCases
-
+    private var alert: UIAlertController!
+    private let dataProvider = DataProvider()
+    private var filePath: String?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        registerForNotifications()
+        dataProvider.fileLocation = { location in
+            print(location.absoluteString)
+            self.filePath = location.absoluteString
+            self.alert.dismiss(animated: false)
+            self.postForNotifications()
+        }
+    }
 
     // MARK: UICollectionViewDataSource
 
@@ -58,8 +74,82 @@ class MainCollectionViewController: UICollectionViewController {
             performSegue(withIdentifier: "OurCourses", sender: self)
         case .uploadImage:
             NetworkManager.uploadImage(url: uploadImage)
+        case .downloadFile:
+            showAlert()
+            dataProvider.startDownload()
         }
 
     }
+    
+    private func showAlert() {
+        alert = UIAlertController(title: "Downloading...", message: "0%", preferredStyle: .alert)
+        let height = NSLayoutConstraint(
+            item: alert.view!,
+            attribute: .height,
+            relatedBy: .equal,
+            toItem: nil,
+            attribute: .notAnAttribute,
+            multiplier: 0,
+            constant: 170
+        )
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive) { action in
+            self.dataProvider.stopDownload()
+        }
+        
+        alert.view.addConstraint(height)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true) { [unowned self] in
+            let size = CGSize(width: 40, height: 40)
+            let point = CGPoint(
+                x: self.alert.view.frame.size.width / 2 - size.width / 2,
+                y: self.alert.view.frame.size.height / 2 - size.height / 2
+            )
+            let activityIndicator = UIActivityIndicatorView(frame: CGRect(origin: point, size: size))
+            activityIndicator.color = .gray
+            activityIndicator.style = .large
+            activityIndicator.startAnimating()
+            
+            let progressView = UIProgressView(frame:
+                                                CGRect(
+                                                    x: 0,
+                                                    y: self.alert.view.frame.height - 44,
+                                                    width: self.alert.view.frame.width,
+                                                    height: 2
+                                                )
+            )
+            
+            progressView.tintColor = .blue
+            
+            self.dataProvider.onProgress = { (progress) in
+                progressView.progress = Float(progress)
+                self.alert.message = String(Int(progress * 100)) + "%"
+            }
+            
+            self.alert.view.addSubview(activityIndicator)
+            self.alert.view.addSubview(progressView)
+        }
+    }
 
+}
+
+extension MainCollectionViewController {
+    private func registerForNotifications() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { _, _ in
+            
+        }
+    }
+    
+    private func postForNotifications() {
+        let content = UNMutableNotificationContent()
+        content.title = "Download complete!"
+        content.body = "Your backgroundtransfer has completed. File path: \(filePath!)"
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: "TransferComplete", content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        
+    }
 }
