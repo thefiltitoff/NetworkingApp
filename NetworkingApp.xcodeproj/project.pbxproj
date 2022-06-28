@@ -14,6 +14,10 @@
 		2B546E0B2864F45E0020B53F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B546E092864F45E0020B53F /* Main.storyboard */; };
 		2B546E0D2864F4600020B53F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B546E0C2864F4600020B53F /* Assets.xcassets */; };
 		2B546E102864F4600020B53F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B546E0E2864F4600020B53F /* LaunchScreen.storyboard */; };
+		2BA63DC9286AF73A00542800 /* CoursesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA63DC8286AF73A00542800 /* CoursesTableViewController.swift */; };
+		2BA63DCB286AF79A00542800 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA63DCA286AF79A00542800 /* WebViewController.swift */; };
+		2BA63DD1286AF95500542800 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA63DD0286AF95500542800 /* Course.swift */; };
+		2BA63DD4286AFE0100542800 /* WebsiteDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA63DD3286AFE0100542800 /* WebsiteDescription.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +30,10 @@
 		2B546E0C2864F4600020B53F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2B546E0F2864F4600020B53F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2B546E112864F4600020B53F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2BA63DC8286AF73A00542800 /* CoursesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesTableViewController.swift; sourceTree = "<group>"; };
+		2BA63DCA286AF79A00542800 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		2BA63DD0286AF95500542800 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
+		2BA63DD3286AFE0100542800 /* WebsiteDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteDescription.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,16 +66,60 @@
 		2B546E022864F45E0020B53F /* NetworkingApp */ = {
 			isa = PBXGroup;
 			children = (
-				2B546E032864F45E0020B53F /* AppDelegate.swift */,
-				2B546E052864F45E0020B53F /* SceneDelegate.swift */,
-				2B546E072864F45E0020B53F /* ViewController.swift */,
-				2B473AF2286A3C12008F9277 /* ImageViewController.swift */,
-				2B546E092864F45E0020B53F /* Main.storyboard */,
-				2B546E0C2864F4600020B53F /* Assets.xcassets */,
-				2B546E0E2864F4600020B53F /* LaunchScreen.storyboard */,
-				2B546E112864F4600020B53F /* Info.plist */,
+				2BA63DCE286AF92B00542800 /* App Supporting files */,
+				2BA63DCC286AF90900542800 /* ViewControllers */,
+				2BA63DCD286AF91800542800 /* Storyboards */,
+				2BA63DD2286AF95B00542800 /* Models */,
+				2BA63DCF286AF93F00542800 /* Resources */,
 			);
 			path = NetworkingApp;
+			sourceTree = "<group>";
+		};
+		2BA63DCC286AF90900542800 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2B546E072864F45E0020B53F /* ViewController.swift */,
+				2B473AF2286A3C12008F9277 /* ImageViewController.swift */,
+				2BA63DCA286AF79A00542800 /* WebViewController.swift */,
+				2BA63DC8286AF73A00542800 /* CoursesTableViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		2BA63DCD286AF91800542800 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				2B546E092864F45E0020B53F /* Main.storyboard */,
+				2B546E0E2864F4600020B53F /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		2BA63DCE286AF92B00542800 /* App Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				2B546E032864F45E0020B53F /* AppDelegate.swift */,
+				2B546E052864F45E0020B53F /* SceneDelegate.swift */,
+				2B546E112864F4600020B53F /* Info.plist */,
+			);
+			path = "App Supporting files";
+			sourceTree = "<group>";
+		};
+		2BA63DCF286AF93F00542800 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2B546E0C2864F4600020B53F /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		2BA63DD2286AF95B00542800 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2BA63DD0286AF95500542800 /* Course.swift */,
+				2BA63DD3286AFE0100542800 /* WebsiteDescription.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,6 +194,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B546E082864F45E0020B53F /* ViewController.swift in Sources */,
+				2BA63DD1286AF95500542800 /* Course.swift in Sources */,
+				2BA63DD4286AFE0100542800 /* WebsiteDescription.swift in Sources */,
+				2BA63DCB286AF79A00542800 /* WebViewController.swift in Sources */,
+				2BA63DC9286AF73A00542800 /* CoursesTableViewController.swift in Sources */,
 				2B546E042864F45E0020B53F /* AppDelegate.swift in Sources */,
 				2B473AF3286A3C12008F9277 /* ImageViewController.swift in Sources */,
 				2B546E062864F45E0020B53F /* SceneDelegate.swift in Sources */,
@@ -293,7 +349,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = RB3BCBLCA6;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NetworkingApp/Info.plist;
+				INFOPLIST_FILE = "NetworkingApp/App Supporting files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -321,7 +377,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = RB3BCBLCA6;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NetworkingApp/Info.plist;
+				INFOPLIST_FILE = "NetworkingApp/App Supporting files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
