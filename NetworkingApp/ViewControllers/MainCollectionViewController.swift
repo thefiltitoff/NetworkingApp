@@ -18,11 +18,15 @@ enum Actions: String, CaseIterable {
     case uploadImage = "Upload Image"
     case downloadFile = "Download File"
     case ourCoursesAlamofire = "Our Courses (Alamofire)"
+    case responseData
+    case responseString
+    case response
 }
 
 private let reuseIdentifier = "Cell"
 private let url = "https://jsonplaceholder.typicode.com/posts"
 private let uploadImage = "https://api.imgur.com/3/image"
+private let swiftBookApi = "https://swiftbook.ru//wp-content/uploads/api/api_courses"
 
 class MainCollectionViewController: UICollectionViewController {
 
@@ -80,6 +84,13 @@ class MainCollectionViewController: UICollectionViewController {
             dataProvider.startDownload()
         case .ourCoursesAlamofire:
             performSegue(withIdentifier: "OurCoursesWithAlamofire", sender: self)
+        case .responseData:
+            performSegue(withIdentifier: "ResponseData", sender: self)
+            AlamofireNetworkManager.responseData(url: swiftBookApi)
+        case .responseString:
+            AlamofireNetworkManager.responseString(url: swiftBookApi)
+        case .response:
+            AlamofireNetworkManager.response(url: swiftBookApi)
         }
 
     }
@@ -138,12 +149,17 @@ class MainCollectionViewController: UICollectionViewController {
     // MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let coursesVC = segue.destination as? CoursesTableViewController else { return }
+        guard let imageVC = segue.destination as? ImageViewController else { return }
         
         switch segue.identifier {
         case "OurCourses":
             coursesVC.fetchData()
         case "OurCoursesWithAlamofire":
             coursesVC.fetchDataWithAlamofire()
+        case "ShowImage":
+            imageVC.fetchImage()
+        case "ResponseData":
+            imageVC.fetchDataWithAlamofire()
         default: break
             
         }

@@ -191,6 +191,7 @@
                         <segue destination="tf5-DU-Ob9" kind="show" identifier="ShowImage" id="C3J-hJ-pP3"/>
                         <segue destination="TEf-9T-MIs" kind="show" identifier="OurCourses" id="McV-SV-pRO"/>
                         <segue destination="TEf-9T-MIs" kind="show" identifier="OurCoursesWithAlamofire" id="gFH-bG-2Q7"/>
+                        <segue destination="tf5-DU-Ob9" kind="show" identifier="ResponseData" id="VgD-3w-M3k"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OeE-ZB-IJa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -253,6 +254,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="VgD-3w-M3k"/>
         <segue reference="gFH-bG-2Q7"/>
     </inferredMetricsTieBreakers>
     <resources>
