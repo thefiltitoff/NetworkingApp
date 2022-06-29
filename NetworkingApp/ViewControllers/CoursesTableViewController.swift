@@ -26,7 +26,12 @@ class CoursesTableViewController: UITableViewController {
     }
     
     func fetchDataWithAlamofire() {
-        AlamofireNetworkManager.sendRequest(url: url)
+        AlamofireNetworkManager.sendRequest(url: url) { courses in
+            self.courses = courses
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
     
     private func configureCell(cell: TableViewCell, for indexPath: IndexPath) {
