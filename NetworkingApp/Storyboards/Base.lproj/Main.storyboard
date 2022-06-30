@@ -90,7 +90,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WWN-aq-Mq5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2724" y="629"/>
+            <point key="canvasLocation" x="2841" y="627"/>
         </scene>
         <!--Web View Controller-->
         <scene sceneID="c0A-Gp-kda">
@@ -132,7 +132,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qyq-O1-i43" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3521.25" y="629.57746478873241"/>
+            <point key="canvasLocation" x="3567" y="628"/>
         </scene>
         <!--Controls-->
         <scene sceneID="Rg7-lm-RbW">
@@ -193,6 +193,8 @@
                         <segue destination="TEf-9T-MIs" kind="show" identifier="OurCoursesWithAlamofire" id="gFH-bG-2Q7"/>
                         <segue destination="tf5-DU-Ob9" kind="show" identifier="ResponseData" id="VgD-3w-M3k"/>
                         <segue destination="tf5-DU-Ob9" kind="show" identifier="LargeImage" id="rWp-Gb-qdI"/>
+                        <segue destination="TEf-9T-MIs" kind="show" identifier="PostRequest" id="XwM-Pf-uiM"/>
+                        <segue destination="TEf-9T-MIs" kind="show" identifier="PutRequest" id="juR-6Z-pcX"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OeE-ZB-IJa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -274,7 +276,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="rWp-Gb-qdI"/>
-        <segue reference="gFH-bG-2Q7"/>
+        <segue reference="juR-6Z-pcX"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">

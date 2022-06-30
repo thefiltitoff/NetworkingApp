@@ -65,9 +65,9 @@ class ImageViewController: UIViewController {
         }
     }
     
-    deinit {
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         print("I worked")
         imageView.image = nil
     }
-
 }

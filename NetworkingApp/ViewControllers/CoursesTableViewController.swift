@@ -15,6 +15,8 @@ class CoursesTableViewController: UITableViewController {
     private var courseName: String?
     private var courseURL: String?
     private let url = "https://swiftbook.ru//wp-content/uploads/api/api_courses"
+    private let postRequestURL = "https://jsonplaceholder.typicode.com/posts"
+    private let putRequestURL = "https://jsonplaceholder.typicode.com/posts/1"
     
     func fetchData() {
         NetworkManager.fetchData(url: url) { [unowned self] courses in
@@ -28,6 +30,26 @@ class CoursesTableViewController: UITableViewController {
     func fetchDataWithAlamofire() {
         AlamofireNetworkManager.sendRequest(url: url) { courses in
             self.courses = courses
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func postRequest() {
+        AlamofireNetworkManager.postRequest(url: postRequestURL) { courses in
+            self.courses = courses
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func putRequest() {
+        AlamofireNetworkManager.putRequest(url: putRequestURL) { courses in
+            self.courses = courses
+            
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }

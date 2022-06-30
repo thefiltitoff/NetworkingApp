@@ -22,6 +22,8 @@ enum Actions: String, CaseIterable {
     case responseString
     case response
     case downloadLargeImage
+    case postAlamofire
+    case putRequest
 }
 
 private let reuseIdentifier = "Cell"
@@ -94,6 +96,10 @@ class MainCollectionViewController: UICollectionViewController {
             AlamofireNetworkManager.response(url: swiftBookApi)
         case .downloadLargeImage:
             performSegue(withIdentifier: "LargeImage", sender: self)
+        case .postAlamofire:
+            performSegue(withIdentifier: "PostRequest", sender: self)
+        case .putRequest:
+            performSegue(withIdentifier: "PutRequest", sender: self)
         }
         
     }
@@ -156,38 +162,23 @@ class MainCollectionViewController: UICollectionViewController {
         
         switch segue.identifier {
         case "OurCourses":
-        coursesVC?.fetchData()
+            coursesVC?.fetchData()
         case "OurCoursesWithAlamofire":
-        coursesVC?.fetchDataWithAlamofire()
+            coursesVC?.fetchDataWithAlamofire()
         case "ShowImage":
-        imageVC?.fetchImage()
+            imageVC?.fetchImage()
         case "ResponseData":
-        imageVC?.fetchDataWithAlamofire()
+            imageVC?.fetchDataWithAlamofire()
         case "LargeImage":
-        imageVC?.downloadImageWithProgress()
+            imageVC?.downloadImageWithProgress()
+        case "PostRequest":
+            coursesVC?.postRequest()
+        case "PutRequest":
+            coursesVC?.putRequest()
         default:
-        break
+            break
         }
-        /*
-         let coursesVC = segue.destination as? CoursesTableViewController
-         let imageVC = segue.destination as? ImageViewController
-         
-         switch segue.identifier {
-         case "OurCourses":
-         coursesVC?.fetchData()
-         case "OurCoursesWithAlamofire":
-         coursesVC?.fetchDataWithAlamofire()
-         case "ShowImage":
-         imageVC?.fetchImage()
-         case "ResponseData":
-         imageVC?.fetchDataWithAlamofire()
-         case "LargeImage":
-         imageVC?.downloadImageWithProgress()
-         default:
-         break
-         }
-         
-         */
+        
     }
 }
 
