@@ -9,8 +9,10 @@
 
 import UIKit
 import FBSDKLoginKit
+import Firebase
 import FirebaseAuth
 import FirebaseDatabase
+import GoogleSignIn
 
 class LoginViewController: UIViewController {
     
@@ -36,12 +38,18 @@ class LoginViewController: UIViewController {
         return loginButton
     }()
     
+    lazy var googleLoginButton: GIDSignInButton = {
+        let loginButton = GIDSignInButton()
+        loginButton.frame = CGRect(x: 32, y: 360 + 160, width: view.frame.width - 64, height: 50)
+        loginButton.addTarget(self, action: #selector(signIn), for: .touchUpInside)
+        return loginButton
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.addVerticalGradientLayer(topColor: primaryColor, bottomColor: secondaryColor)
         setupViews()
-        
         
     }
     
@@ -54,6 +62,7 @@ class LoginViewController: UIViewController {
     private func setupViews()  {
         view.addSubview(facebookLoginButton)
         view.addSubview(customFacebookLoginButton)
+        view.addSubview(googleLoginButton)
     }
     
     private func openMainVC() {
@@ -144,4 +153,45 @@ extension LoginViewController: LoginButtonDelegate {
             self.openMainVC()
         }
     }
+}
+
+// MARK: Google SDK
+extension LoginViewController: AuthUIDelegate {
+    @objc func signIn() {
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+
+        // Create Google Sign In configuration object.
+        let config = GIDConfiguration(clientID: clientID)
+
+        // Start the sign in flow!
+        GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { [unowned self] user, error in
+
+          if let error = error {
+              print(error.localizedDescription)
+            return
+          }
+
+          guard
+            let authentication = user?.authentication,
+            let idToken = authentication.idToken
+          else {
+            return
+          }
+
+          let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                         accessToken: authentication.accessToken)
+
+            Auth.auth().signIn(with: credential) { user, error in
+                if let error = error {
+                    print(error.localizedDescription)
+                  return
+                }
+                
+                print("Successfull log in with Google")
+                self.openMainVC()
+            }
+        }
+    }
+    
+    
 }
