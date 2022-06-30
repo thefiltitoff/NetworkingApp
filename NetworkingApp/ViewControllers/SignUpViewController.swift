@@ -10,6 +10,8 @@ import UIKit
 
 class SignUpViewController: UIViewController {
     
+    var activityIndicator: UIActivityIndicatorView!
+    
     lazy var continueButton: UIButton = {
         let button = UIButton()
         button.frame = CGRect(x: 0, y: 0, width: 200, height: 50)
@@ -35,6 +37,13 @@ class SignUpViewController: UIViewController {
         view.addVerticalGradientLayer(topColor: primaryColor, bottomColor: secondaryColor)
         view.addSubview(continueButton)
         setContinueButton(enabled: false)
+        
+        activityIndicator = UIActivityIndicatorView(style: .medium)
+        activityIndicator.color = secondaryColor
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        activityIndicator.center = continueButton.center
+        
+        view.addSubview(activityIndicator)
         
         userNameTextField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
         emailTextField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
@@ -69,6 +78,7 @@ class SignUpViewController: UIViewController {
         
         continueButton.center = CGPoint(x: view.center.x,
                                         y: view.frame.height - keyboardFrame.height - 16.0 - continueButton.frame.height / 2)
+        activityIndicator.center = continueButton.center
     }
     
     private func setContinueButton(enabled:Bool) {
@@ -97,6 +107,8 @@ class SignUpViewController: UIViewController {
     }
     
     @objc private func handleSignUp() {
-        
+        setContinueButton(enabled: false)
+        continueButton.setTitle("", for: .normal)
+        activityIndicator.startAnimating()
     }
 }
