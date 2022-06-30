@@ -319,6 +319,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="TFp-ih-GLZ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="IQ3-86-ZZu">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -348,17 +349,26 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="bXy-96-gTm">
+                                <rect key="frame" x="177.5" y="169" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lAo-Pu-VRN"/>
                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="bXy-96-gTm" firstAttribute="centerX" secondItem="V1a-OC-gyC" secondAttribute="centerX" id="Jq7-SD-D2B"/>
                             <constraint firstItem="V1a-OC-gyC" firstAttribute="top" secondItem="lAo-Pu-VRN" secondAttribute="top" constant="150" id="ggT-xM-tOW"/>
                             <constraint firstItem="V1a-OC-gyC" firstAttribute="centerX" secondItem="lAo-Pu-VRN" secondAttribute="centerX" id="nBr-ri-tW4"/>
+                            <constraint firstItem="bXy-96-gTm" firstAttribute="centerY" secondItem="V1a-OC-gyC" secondAttribute="centerY" id="ueN-sc-uQ9"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" image="profile" id="tyj-h5-Kpx">
                         <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-15"/>
                     </tabBarItem>
+                    <connections>
+                        <outlet property="activityIndicator" destination="bXy-96-gTm" id="eJp-5K-IFT"/>
+                        <outlet property="userNameLabel" destination="V1a-OC-gyC" id="kZ4-38-NBR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kpc-WD-KqE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

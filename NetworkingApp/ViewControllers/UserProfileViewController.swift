@@ -10,6 +10,7 @@
 import UIKit
 import FBSDKLoginKit
 import FirebaseAuth
+import FirebaseDatabase
 
 class UserProfileViewController: UIViewController {
     lazy var facebookLoginButton: UIButton = {
@@ -22,13 +23,21 @@ class UserProfileViewController: UIViewController {
         loginButton.delegate = self
         return loginButton
     }()
-
+    @IBOutlet var userNameLabel: UILabel!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.addVerticalGradientLayer(topColor: primaryColor, bottomColor: secondaryColor)
+        userNameLabel.isHidden = true
         setupViews()
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchingUserData()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -55,6 +64,26 @@ class UserProfileViewController: UIViewController {
             }
         } catch let error {
             print(error.localizedDescription)
+        }
+    }
+    
+    private func fetchingUserData() {
+        if Auth.auth().currentUser != nil {
+            guard let uid = Auth.auth().currentUser?.uid else { return }
+            Database.database().reference()
+                .child("users")
+                .child(uid)
+                .observeSingleEvent(of: .value) { snapshot in
+                    guard let userData = snapshot.value as? [String: Any] else { return }
+                    let currentUser = CurrentUser(uid: uid, data: userData)
+                    self.activityIndicator.stopAnimating()
+                    self.userNameLabel.isHidden = false
+                    self.userNameLabel.text = "\(currentUser?.name ?? "Noname") Logged in with Facebook"
+                    
+                } withCancel: { error in
+                    print(error.localizedDescription)
+                }
+
         }
     }
 }
