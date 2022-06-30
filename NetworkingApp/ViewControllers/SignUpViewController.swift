@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SignUpViewController: UIViewController {
     
@@ -110,5 +111,38 @@ class SignUpViewController: UIViewController {
         setContinueButton(enabled: false)
         continueButton.setTitle("", for: .normal)
         activityIndicator.startAnimating()
+        
+        guard let email = emailTextField.text,
+        let password = passwordTextField.text,
+        let username = userNameTextField.text else { return }
+        
+        Auth.auth().createUser(withEmail: email, password: password) { user, error in
+            if let error = error {
+                print(error.localizedDescription)
+                
+                self.setContinueButton(enabled: true)
+                self.continueButton.setTitle("Continue", for: .normal)
+                self.activityIndicator.stopAnimating()
+                return
+            }
+            
+            print("SuccesFull")
+            if let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest() {
+                changeRequest.displayName = username
+                changeRequest.commitChanges { error in
+                    if let error = error {
+                        print(error.localizedDescription)
+                        self.setContinueButton(enabled: true)
+                        self.continueButton.setTitle("Continue", for: .normal)
+                        self.activityIndicator.stopAnimating()
+                        return
+                    }
+                    
+                    print("Display name changed")
+                    self.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true)
+                }
+            }
+            
+        }
     }
 }
