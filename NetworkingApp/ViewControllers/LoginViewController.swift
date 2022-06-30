@@ -33,7 +33,7 @@ class LoginViewController: UIViewController {
         loginButton.setTitleColor(.white, for: .normal)
         loginButton.frame = CGRect(x: 32, y: 360 + 60, width: view.frame.width - 64, height: 50)
         loginButton.layer.cornerRadius = 5
-
+        
         loginButton.addTarget(self, action: #selector(facebookLogIn), for: .touchUpInside)
         return loginButton
     }()
@@ -47,7 +47,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.addVerticalGradientLayer(topColor: primaryColor, bottomColor: secondaryColor)
         setupViews()
         
@@ -68,7 +68,7 @@ class LoginViewController: UIViewController {
     private func openMainVC() {
         dismiss(animated: true)
     }
-
+    
 }
 
 // MARK: FBSDK
@@ -159,36 +159,41 @@ extension LoginViewController: LoginButtonDelegate {
 extension LoginViewController: AuthUIDelegate {
     @objc func signIn() {
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-
+        
         // Create Google Sign In configuration object.
         let config = GIDConfiguration(clientID: clientID)
-
+        
         // Start the sign in flow!
         GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { [unowned self] user, error in
-
-          if let error = error {
-              print(error.localizedDescription)
-            return
-          }
-
-          guard
-            let authentication = user?.authentication,
-            let idToken = authentication.idToken
-          else {
-            return
-          }
-
-          let credential = GoogleAuthProvider.credential(withIDToken: idToken,
-                                                         accessToken: authentication.accessToken)
-
+            
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            if let username = user?.profile?.name, let email = user?.profile?.email {
+                let userData = ["name": username, "email": email]
+                userProfile = UserProfile(data: userData)
+            }
+            
+            guard
+                let authentication = user?.authentication,
+                let idToken = authentication.idToken
+            else {
+                return
+            }
+            
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                           accessToken: authentication.accessToken)
+            
             Auth.auth().signIn(with: credential) { user, error in
                 if let error = error {
                     print(error.localizedDescription)
-                  return
+                    return
                 }
                 
                 print("Successfull log in with Google")
-                self.openMainVC()
+                self.saveIntoFireBase()
             }
         }
     }
