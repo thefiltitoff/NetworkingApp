@@ -10,8 +10,12 @@
 import UIKit
 import FBSDKLoginKit
 import FirebaseAuth
+import FirebaseDatabase
 
 class LoginViewController: UIViewController {
+    
+    var userProfile: UserProfile!
+    
     lazy var facebookLoginButton: UIButton = {
         let loginButton = FBLoginButton()
         loginButton.frame = CGRect(x: 32, y: 360, width: view.frame.width - 64, height: 50)
@@ -71,8 +75,7 @@ extension LoginViewController: LoginButtonDelegate {
         }
         
         print("Successfully logged int with facebook!")
-        openMainVC()
-        fetchFacebookFields()
+        signIntoFireBase()
     }
     
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
@@ -91,8 +94,6 @@ extension LoginViewController: LoginButtonDelegate {
             if result.isCancelled { return}
             else {
                 self.signIntoFireBase()
-                self.fetchFacebookFields()
-                self.openMainVC()
             }
             
         }
@@ -109,7 +110,8 @@ extension LoginViewController: LoginButtonDelegate {
                 return
             }
             
-            print("Logged in", user!)
+            print("Logged in")
+            self.fetchFacebookFields()
         }
     }
     
@@ -121,9 +123,25 @@ extension LoginViewController: LoginButtonDelegate {
             }
             
             if let result = result as? [String: Any] {
-                
+                self.userProfile = UserProfile(data: result)
+                self.saveIntoFireBase()
             }
             
+        }
+    }
+    
+    private func saveIntoFireBase() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let userData = ["name": userProfile.name, "email": userProfile.email]
+        
+        let values = [uid : userData]
+        Database.database().reference().child("users").updateChildValues(values) { error, _ in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            self.openMainVC()
         }
     }
 }

@@ -27,12 +27,12 @@ extension UIView {
 extension UIColor {
     convenience init? (hexValue: String, alpha: CGFloat) {
         if hexValue.hasPrefix("#") {
-
+            
             let scanner = Scanner(string: hexValue)
-     //       if #available(iOS 12.0, *) {
-                scanner.scanLocation = 1
-     //       }
-
+            
+            scanner.scanLocation = 1
+            
+            
             var hexInt32: UInt32 = 0
             if hexValue.count == 7 {
                 if scanner.scanHexInt32(&hexInt32) {
