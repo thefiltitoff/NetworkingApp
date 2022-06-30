@@ -72,7 +72,7 @@ extension LoginViewController: LoginButtonDelegate {
         
         print("Successfully logged int with facebook!")
         openMainVC()
-        
+        fetchFacebookFields()
     }
     
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
@@ -91,6 +91,7 @@ extension LoginViewController: LoginButtonDelegate {
             if result.isCancelled { return}
             else {
                 self.signIntoFireBase()
+                self.fetchFacebookFields()
                 self.openMainVC()
             }
             
@@ -109,6 +110,20 @@ extension LoginViewController: LoginButtonDelegate {
             }
             
             print("Logged in", user!)
+        }
+    }
+    
+    private func fetchFacebookFields() {
+        GraphRequest(graphPath: "me", parameters: ["fields": "id, name, email"]).start { _, result, error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            if let result = result as? [String: Any] {
+                
+            }
+            
         }
     }
 }
