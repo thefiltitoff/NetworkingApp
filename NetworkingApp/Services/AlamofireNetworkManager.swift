@@ -175,8 +175,8 @@ class AlamofireNetworkManager {
                 
             case .success(
                 request: let uploadRequest,
-                streamingFromDisk: let streamingFromDisk,
-                streamFileURL: let streamFileURL
+                streamingFromDisk: _,
+                streamFileURL: _
             ):
                 uploadRequest.validate().responseJSON { responseJSON in
                     switch responseJSON.result {
