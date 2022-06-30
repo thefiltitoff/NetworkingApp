@@ -21,6 +21,7 @@ enum Actions: String, CaseIterable {
     case responseData
     case responseString
     case response
+    case downloadLargeImage
 }
 
 private let reuseIdentifier = "Cell"
@@ -29,8 +30,8 @@ private let uploadImage = "https://api.imgur.com/3/image"
 private let swiftBookApi = "https://swiftbook.ru//wp-content/uploads/api/api_courses"
 
 class MainCollectionViewController: UICollectionViewController {
-
-   // let actions = ["Download Image", "GET", "POST", "Our Courses", "Upload Image"]
+    
+    // let actions = ["Download Image", "GET", "POST", "Our Courses", "Upload Image"]
     let actions = Actions.allCases
     private var alert: UIAlertController!
     private let dataProvider = DataProvider()
@@ -47,23 +48,23 @@ class MainCollectionViewController: UICollectionViewController {
             self.postForNotifications()
         }
     }
-
+    
     // MARK: UICollectionViewDataSource
-
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return actions.count
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? CollectionViewCell else { return UICollectionViewCell() }
         
         cell.label.text = actions[indexPath.row].rawValue
-            
+        
         return cell
     }
-
+    
     // MARK: UICollectionViewDelegate
-
+    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let action = actions[indexPath.row]
         
@@ -91,8 +92,10 @@ class MainCollectionViewController: UICollectionViewController {
             AlamofireNetworkManager.responseString(url: swiftBookApi)
         case .response:
             AlamofireNetworkManager.response(url: swiftBookApi)
+        case .downloadLargeImage:
+            performSegue(withIdentifier: "LargeImage", sender: self)
         }
-
+        
     }
     
     private func showAlert() {
@@ -145,24 +148,46 @@ class MainCollectionViewController: UICollectionViewController {
             self.alert.view.addSubview(progressView)
         }
     }
-
+    
     // MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let coursesVC = segue.destination as? CoursesTableViewController else { return }
-        guard let imageVC = segue.destination as? ImageViewController else { return }
+        let coursesVC = segue.destination as? CoursesTableViewController
+        let imageVC = segue.destination as? ImageViewController
         
         switch segue.identifier {
         case "OurCourses":
-            coursesVC.fetchData()
+        coursesVC?.fetchData()
         case "OurCoursesWithAlamofire":
-            coursesVC.fetchDataWithAlamofire()
+        coursesVC?.fetchDataWithAlamofire()
         case "ShowImage":
-            imageVC.fetchImage()
+        imageVC?.fetchImage()
         case "ResponseData":
-            imageVC.fetchDataWithAlamofire()
-        default: break
-            
+        imageVC?.fetchDataWithAlamofire()
+        case "LargeImage":
+        imageVC?.downloadImageWithProgress()
+        default:
+        break
         }
+        /*
+         let coursesVC = segue.destination as? CoursesTableViewController
+         let imageVC = segue.destination as? ImageViewController
+         
+         switch segue.identifier {
+         case "OurCourses":
+         coursesVC?.fetchData()
+         case "OurCoursesWithAlamofire":
+         coursesVC?.fetchDataWithAlamofire()
+         case "ShowImage":
+         imageVC?.fetchImage()
+         case "ResponseData":
+         imageVC?.fetchDataWithAlamofire()
+         case "LargeImage":
+         imageVC?.downloadImageWithProgress()
+         default:
+         break
+         }
+         
+         */
     }
 }
 
