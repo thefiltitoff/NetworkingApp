@@ -21,9 +21,9 @@ class UserProfileViewController: UIViewController {
     lazy var logoutButton: UIButton = {
         let button = UIButton()
         button.frame = CGRect(x: 32,
-                                   y: view.frame.height - 200,
-                                   width: view.frame.width - 64,
-                                   height: 50
+                              y: view.frame.height - 200,
+                              width: view.frame.width - 64,
+                              height: 50
         )
         button.backgroundColor = UIColor(hexValue: "#3B5999", alpha: 1)
         button.setTitle("Log Out", for: .normal)
@@ -39,11 +39,11 @@ class UserProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.addVerticalGradientLayer(topColor: primaryColor, bottomColor: secondaryColor)
         userNameLabel.isHidden = true
         setupViews()
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,25 +80,30 @@ class UserProfileViewController: UIViewController {
     
     private func fetchingUserData() {
         if Auth.auth().currentUser != nil {
-            guard let uid = Auth.auth().currentUser?.uid else { return }
-            Database.database().reference()
-                .child("users")
-                .child(uid)
-                .observeSingleEvent(of: .value) { snapshot in
-                    guard let userData = snapshot.value as? [String: Any] else { return }
-                    self.currentUser = CurrentUser(uid: uid, data: userData)
-                    self.activityIndicator.stopAnimating()
-                    self.userNameLabel.isHidden = false
-                    self.userNameLabel.text = self.getProviderData()
-                    
-                } withCancel: { error in
-                    print(error.localizedDescription)
-                }
-
+            if let username = Auth.auth().currentUser?.displayName {
+                activityIndicator.stopAnimating()
+                userNameLabel.isHidden = false
+                userNameLabel.text = getProviderData(with: username)
+            } else {
+                guard let uid = Auth.auth().currentUser?.uid else { return }
+                Database.database().reference()
+                    .child("users")
+                    .child(uid)
+                    .observeSingleEvent(of: .value) { snapshot in
+                        guard let userData = snapshot.value as? [String: Any] else { return }
+                        self.currentUser = CurrentUser(uid: uid, data: userData)
+                        self.activityIndicator.stopAnimating()
+                        self.userNameLabel.isHidden = false
+                        self.userNameLabel.text = self.getProviderData(with: self.currentUser?.name ?? "Noname")
+                        
+                    } withCancel: { error in
+                        print(error.localizedDescription)
+                    } }
+            
         }
     }
     
-    private func getProviderData() -> String {
+    private func getProviderData(with user: String) -> String {
         var greetings = ""
         
         if let providerData = Auth.auth().currentUser?.providerData {
@@ -108,12 +113,14 @@ class UserProfileViewController: UIViewController {
                     provider = "Facebook"
                 case "google.com":
                     provider = "Google"
+                case "password":
+                    provider = "Email"
                 default:
                     break
                 }
             }
             
-            greetings = "\(self.currentUser?.name ?? "Noname") Logged in with \(provider!)"
+            greetings = "\(user) Logged in with \(provider!)"
         }
         return greetings
     }
@@ -129,6 +136,10 @@ class UserProfileViewController: UIViewController {
                 case "google.com":
                     GIDSignIn.sharedInstance.signOut()
                     print("Logout from google")
+                    openLoginVC()
+                case "password":
+                    try! Auth.auth().signOut()
+                    print("Logout with password")
                     openLoginVC()
                 default:
                     print(userInfo.providerID)
