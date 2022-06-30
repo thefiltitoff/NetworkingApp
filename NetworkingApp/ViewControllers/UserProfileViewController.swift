@@ -1,5 +1,5 @@
 //
-//  LoginViewController.swift
+//  UserProfileViewController.swift
 //  NetworkingApp
 //
 //  Created by Felix Titov on 6/30/22.
@@ -10,21 +10,24 @@
 import UIKit
 import FBSDKLoginKit
 
-class LoginViewController: UIViewController {
+class UserProfileViewController: UIViewController {
     lazy var facebookLoginButton: UIButton = {
         let loginButton = FBLoginButton()
-        loginButton.frame = CGRect(x: 32, y: 320, width: view.frame.width - 64, height: 50)
+        loginButton.frame = CGRect(x: 32,
+                                   y: view.frame.height - 200,
+                                   width: view.frame.width - 64,
+                                   height: 50
+        )
         loginButton.delegate = self
         return loginButton
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.addVerticalGradientLayer(topColor: primaryColor, bottomColor: secondaryColor)
         setupViews()
-        
-        
+
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -33,34 +36,35 @@ class LoginViewController: UIViewController {
         }
     }
     
-    private func setupViews()  {
+    private func setupViews() {
         view.addSubview(facebookLoginButton)
     }
     
-    private func openMainVC() {
-        dismiss(animated: true)
+    private func openLoginVC() {
+        if !AccessToken.isCurrentAccessTokenActive {
+            DispatchQueue.main.async {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                loginViewController.modalPresentationStyle = .fullScreen
+                
+                self.present(loginViewController, animated: true)
+                return
+            }
+        }
     }
-
 }
 
-// MARK: FBSDK
-extension LoginViewController: LoginButtonDelegate {
+extension UserProfileViewController: LoginButtonDelegate {
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
         if error != nil {
             print(error?.localizedDescription ?? "Error")
             return
         }
-        
-        guard AccessToken.isCurrentAccessTokenActive else  {
-            return
-        }
-        
         print("Successfully logged int with facebook!")
-        openMainVC()
-        
     }
     
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+        openLoginVC()
         print("User logged out")
     }
 }

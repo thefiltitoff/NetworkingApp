@@ -9,6 +9,7 @@
 
 import UIKit
 import UserNotifications
+import FBSDKLoginKit
 
 enum Actions: String, CaseIterable {
     case downloadImage = "Download Image"
@@ -50,6 +51,8 @@ class MainCollectionViewController: UICollectionViewController {
             self.alert.dismiss(animated: false)
             self.postForNotifications()
         }
+        
+        checkLogIn()
     }
     
     // MARK: UICollectionViewDataSource
@@ -202,5 +205,20 @@ extension MainCollectionViewController {
         let request = UNNotificationRequest(identifier: "TransferComplete", content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         
+    }
+}
+ // MARK: FBSDK
+extension MainCollectionViewController {
+    private func checkLogIn() {
+        if !AccessToken.isCurrentAccessTokenActive {
+            DispatchQueue.main.async {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                loginViewController.modalPresentationStyle = .fullScreen
+                
+                self.present(loginViewController, animated: true)
+                return
+            }
+        }
     }
 }
