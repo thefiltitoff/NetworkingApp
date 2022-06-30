@@ -160,4 +160,36 @@ class AlamofireNetworkManager {
             }
         }
     }
+    
+    static func uploadImage(url: String) {
+        guard let url = URL(string: url) else { return }
+        
+        let image = UIImage(named: "Fox")!
+        let data = image.pngData()!
+        let httpHeaders = ["Authorization" : "Client-ID 15abe021a630f67"]
+        
+        upload(multipartFormData: { multipartFormData in
+            multipartFormData.append(data, withName: "image")
+        }, to: url, headers: httpHeaders) { encodingCompletion in
+            switch encodingCompletion {
+                
+            case .success(
+                request: let uploadRequest,
+                streamingFromDisk: let streamingFromDisk,
+                streamFileURL: let streamFileURL
+            ):
+                uploadRequest.validate().responseJSON { responseJSON in
+                    switch responseJSON.result {
+                        
+                    case .success(let value):
+                        print(value)
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
 }
