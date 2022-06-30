@@ -10,6 +10,7 @@
 import UIKit
 import UserNotifications
 import FBSDKLoginKit
+import FirebaseAuth
 
 enum Actions: String, CaseIterable {
     case downloadImage = "Download Image"
@@ -210,7 +211,7 @@ extension MainCollectionViewController {
  // MARK: FBSDK
 extension MainCollectionViewController {
     private func checkLogIn() {
-        if !AccessToken.isCurrentAccessTokenActive {
+        if Auth.auth().currentUser == nil {
             DispatchQueue.main.async {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController

@@ -9,6 +9,7 @@
 
 import UIKit
 import FBSDKLoginKit
+import FirebaseAuth
 
 class UserProfileViewController: UIViewController {
     lazy var facebookLoginButton: UIButton = {
@@ -41,7 +42,9 @@ class UserProfileViewController: UIViewController {
     }
     
     private func openLoginVC() {
-        if !AccessToken.isCurrentAccessTokenActive {
+        do {
+            try Auth.auth().signOut()
+            
             DispatchQueue.main.async {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
@@ -50,6 +53,8 @@ class UserProfileViewController: UIViewController {
                 self.present(loginViewController, animated: true)
                 return
             }
+        } catch let error {
+            print(error.localizedDescription)
         }
     }
 }

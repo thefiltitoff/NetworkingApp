@@ -9,6 +9,7 @@
 
 import UIKit
 import FBSDKCoreKit
+import Firebase
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,6 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     application,
                     didFinishLaunchingWithOptions: launchOptions
                 )
+        
+        FirebaseApp.configure()
         return true
     }
     
