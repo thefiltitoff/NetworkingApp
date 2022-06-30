@@ -41,7 +41,28 @@ class LoginViewController: UIViewController {
     lazy var googleLoginButton: GIDSignInButton = {
         let loginButton = GIDSignInButton()
         loginButton.frame = CGRect(x: 32, y: 360 + 160, width: view.frame.width - 64, height: 50)
-        loginButton.addTarget(self, action: #selector(signIn), for: .touchUpInside)
+        loginButton.addTarget(self, action: #selector(signInWithGoogle), for: .touchUpInside)
+        return loginButton
+    }()
+    
+    lazy var customGoogleLoginButton: UIButton = {
+        let loginButton = UIButton()
+        loginButton.frame = CGRect(x: 32, y: 360 + 240, width: view.frame.width - 64, height: 50)
+        loginButton.backgroundColor = .white
+        loginButton.setTitle("Log in with Google", for: .normal)
+        loginButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        loginButton.setTitleColor(.gray, for: .normal)
+        loginButton.layer.cornerRadius = 5
+        loginButton.addTarget(self, action: #selector(signInWithGoogle), for: .touchUpInside)
+        return loginButton
+    }()
+    
+    lazy var signInWithEmail: UIButton = {
+        
+        let loginButton = UIButton()
+        loginButton.frame = CGRect(x: 32, y: 360 + 80 + 80 + 80 + 80, width: view.frame.width - 64, height: 50)
+        loginButton.setTitle("Sign In with Email", for: .normal)
+        loginButton.addTarget(self, action: #selector(openSignInVC), for: .touchUpInside)
         return loginButton
     }()
     
@@ -63,6 +84,8 @@ class LoginViewController: UIViewController {
         view.addSubview(facebookLoginButton)
         view.addSubview(customFacebookLoginButton)
         view.addSubview(googleLoginButton)
+        view.addSubview(customGoogleLoginButton)
+        view.addSubview(signInWithEmail)
     }
     
     private func openMainVC() {
@@ -153,11 +176,15 @@ extension LoginViewController: LoginButtonDelegate {
             self.openMainVC()
         }
     }
+    
+    @objc private func openSignInVC() {
+        performSegue(withIdentifier: "SignIn", sender: self)
+    }
 }
 
 // MARK: Google SDK
 extension LoginViewController: AuthUIDelegate {
-    @objc func signIn() {
+    @objc func signInWithGoogle() {
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
         
         // Create Google Sign In configuration object.
