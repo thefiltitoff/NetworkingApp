@@ -380,7 +380,7 @@
         <!--Sign In-->
         <scene sceneID="dCx-op-bOK">
             <objects>
-                <viewController storyboardIdentifier="SignIn" title="Sign In" id="hHh-65-jWs" customClass="SignInViewController" customModule="Networking" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignIn" title="Sign In" id="hHh-65-jWs" customClass="SignInViewController" customModule="NetworkingApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="X0l-X1-M9V">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -513,7 +513,7 @@
         <!--Sign Up-->
         <scene sceneID="xK1-uu-FLV">
             <objects>
-                <viewController storyboardIdentifier="SignUp" title="Sign Up" id="a2b-Ob-AGe" customClass="SignUpViewController" customModule="Networking" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUp" title="Sign Up" id="a2b-Ob-AGe" customClass="SignUpViewController" customModule="NetworkingApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="b5L-FF-z8G">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

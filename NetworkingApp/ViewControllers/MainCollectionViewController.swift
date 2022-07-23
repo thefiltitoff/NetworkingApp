@@ -36,11 +36,11 @@ private let swiftBookApi = "https://swiftbook.ru//wp-content/uploads/api/api_cou
 
 class MainCollectionViewController: UICollectionViewController {
     
-    // let actions = ["Download Image", "GET", "POST", "Our Courses", "Upload Image"]
-    let actions = Actions.allCases
     private var alert: UIAlertController!
     private let dataProvider = DataProvider()
     private var filePath: String?
+    
+    let actions = Actions.allCases
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -141,13 +141,14 @@ class MainCollectionViewController: UICollectionViewController {
             activityIndicator.style = .large
             activityIndicator.startAnimating()
             
-            let progressView = UIProgressView(frame:
-                                                CGRect(
-                                                    x: 0,
-                                                    y: self.alert.view.frame.height - 44,
-                                                    width: self.alert.view.frame.width,
-                                                    height: 2
-                                                )
+            let progressView = UIProgressView(
+                frame:
+                    CGRect(
+                        x: 0,
+                        y: self.alert.view.frame.height - 44,
+                        width: self.alert.view.frame.width,
+                        height: 2
+                    )
             )
             
             progressView.tintColor = .blue
@@ -208,7 +209,8 @@ extension MainCollectionViewController {
         
     }
 }
- // MARK: FBSDK
+
+// MARK: FBSDK
 extension MainCollectionViewController {
     private func checkLogIn() {
         if Auth.auth().currentUser == nil {

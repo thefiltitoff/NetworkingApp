@@ -2,8 +2,8 @@
 //  SignInViewController.swift
 //  Networking
 //
-//  Created by Alexey Efimov on 18/10/2018.
-//  Copyright © 2018 Alexey Efimov. All rights reserved.
+//  Created by Felix Titov on 6/28/22.
+//  Copyright © 2022 Felix Titov. All rights reserved.
 //
 
 import UIKit
