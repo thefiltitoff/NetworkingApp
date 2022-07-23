@@ -28,6 +28,7 @@ class UserProfileViewController: UIViewController {
         button.backgroundColor = UIColor(hexValue: "#3B5999", alpha: 1)
         button.setTitle("Log Out", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        
         button.setTitleColor(.white, for: .normal)
         button.layer.contents = 5
         button.addTarget(self, action: #selector(signOut), for: .touchUpInside)

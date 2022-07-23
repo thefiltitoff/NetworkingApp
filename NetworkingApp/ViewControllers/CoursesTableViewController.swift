@@ -11,12 +11,13 @@ import UIKit
 
 class CoursesTableViewController: UITableViewController {
     
-    private var courses = [Course]()
-    private var courseName: String?
-    private var courseURL: String?
     private let url = "https://swiftbook.ru//wp-content/uploads/api/api_courses"
     private let postRequestURL = "https://jsonplaceholder.typicode.com/posts"
     private let putRequestURL = "https://jsonplaceholder.typicode.com/posts/1"
+    
+    private var courses = [Course]()
+    private var courseName: String?
+    private var courseURL: String?
     
     func fetchData() {
         NetworkManager.fetchData(url: url) { [unowned self] courses in
@@ -90,7 +91,6 @@ class CoursesTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return courses.count
     }
 
@@ -101,41 +101,6 @@ class CoursesTableViewController: UITableViewController {
 
         return cell
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     // MARK: - Navigation
 

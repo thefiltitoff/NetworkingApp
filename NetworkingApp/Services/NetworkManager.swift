@@ -9,7 +9,6 @@
 
 import UIKit
 
-
 class NetworkManager {
     
     static func getRequest(url : String) {

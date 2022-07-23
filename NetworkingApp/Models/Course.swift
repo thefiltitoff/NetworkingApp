@@ -47,14 +47,12 @@ struct Course: Decodable {
     static func getItems(from json: Any) -> [Course]? {
         guard let json = json as? Array<[String: Any]> else { return nil}
         
-        /*
         var courses: [Course] = []
         for item in json {
             if let course = Course(json: item) {
                 courses.append(course)
             }
         }
-        */
         
         return json.compactMap { Course(json: $0) }
     }

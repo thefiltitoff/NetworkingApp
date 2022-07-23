@@ -136,7 +136,7 @@ extension LoginViewController: LoginButtonDelegate {
         guard let accessTokenString = accessToken?.tokenString else { return }
         let credentials = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
         
-        Auth.auth().signIn(with: credentials) { user, error in
+        Auth.auth().signIn(with: credentials) { [unowned self] user, error in
             if let error = error {
                 print(error.localizedDescription)
                 return
@@ -148,7 +148,7 @@ extension LoginViewController: LoginButtonDelegate {
     }
     
     private func fetchFacebookFields() {
-        GraphRequest(graphPath: "me", parameters: ["fields": "id, name, email"]).start { _, result, error in
+        GraphRequest(graphPath: "me", parameters: ["fields": "id, name, email"]).start {[unowned self] _, result, error in
             if let error = error {
                 print(error.localizedDescription)
                 return
@@ -167,7 +167,7 @@ extension LoginViewController: LoginButtonDelegate {
         let userData = ["name": userProfile.name, "email": userProfile.email]
         
         let values = [uid : userData]
-        Database.database().reference().child("users").updateChildValues(values) { error, _ in
+        Database.database().reference().child("users").updateChildValues(values) { [unowned self] error, _ in
             if let error = error {
                 print(error.localizedDescription)
                 return
