@@ -10,7 +10,7 @@ User can login with google, facebook and email, sign up, and fetching different 
   [![Swift](https://img.shields.io/badge/Swift-5.5-orange)](https://developer.apple.com/documentation/swift)
   [![UIKit](https://img.shields.io/badge/UIKit-%20LTS-yellowgreen)](https://developer.apple.com/documentation/uikit)
   [![Google](https://img.shields.io/static/v1?label=Google&message=6.2.2&color=ffffff)](https://firebase.google.com/docs/auth/ios/google-signin)
-  [![Facebook](https://img.shields.io/static/v1?label=Facebook&message=14.1.0&color=gef)](https://developers.facebook.com/docs/ios/)
+  [![Facebook](https://img.shields.io/static/v1?label=Facebook&message=14.1.0&color=9cf)](https://developers.facebook.com/docs/ios/)
   [![FireBase](https://img.shields.io/badge/Firebase-9.1.0-important)](https://firebase.google.com/docs)
  
 </div>
@@ -21,7 +21,7 @@ User can login with google, facebook and email, sign up, and fetching different 
 
 - [Tech stack](#tech-stack)
 
-- [License](#license)
+- [License](#copyright)
 
 ## Demo
 
